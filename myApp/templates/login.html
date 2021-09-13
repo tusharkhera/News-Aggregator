@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="container-login"> 
+
+<h1 style="color: rgb(207, 12, 149);display: flex; justify-content: center; text-decoration: underline;">Log in</h1>
+
+<form action="" method="post" class="login-form" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %} 
+    {{error}} 
+    {% endfor %}
+    {% endif %}
+    <ul>
+    {% for fm in form %}
+    <li>{{fm.label_tag}}  {{fm}} </li> {{fm.errors|striptags}}
+    {% endfor %}
+    </ul>
+    <input style="font-weight: bolder; font-size: larger; border: 1px solid rgb(207, 12, 149); text-shadow: 3px 3px 10px" type="submit" value="Login">
+</form>
+<p style="color: white;display: flex; justify-content: center;">Don't have an account ? <a class="signup-link" href="{% url 'sign_up' %}">Sign up</a></p>
+<button type="submit" style="background-color: transparent; font-weight: bolder; font-size: larger; border: 1px solid rgb(207, 12, 149); text-shadow: 3px 3px 10px"><a href="{% url 'forgot_pass' %}" style="color: rgb(207, 12, 149);">Forgot password</a></button>
+</div>
+{% endblock %}

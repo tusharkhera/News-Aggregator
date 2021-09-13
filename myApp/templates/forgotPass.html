@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="container-forgot-pass"> 
+
+<h1 style="color: rgb(207, 12, 149);display: flex; justify-content: center; text-decoration: underline;">Forgot password</h1>
+
+<form action="" method="post" class="forgot-pass-form" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %} 
+    {{error}} 
+    {% endfor %}
+    {% endif %}
+    <ul>
+    {% for fm in form %}
+    <li>{{fm.label_tag}}  {{fm}} </li> {{fm.errors|striptags}}
+    {% endfor %}
+    </ul>
+    <input style="font-weight: bolder; font-size: larger; border: 1px solid rgb(207, 12, 149); text-shadow: 3px 3px 10px" type="submit" value="submit">
+</form>
+{% endblock content %}

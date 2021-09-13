@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Sign Up {% endblock title %}
+
+{% block content %}
+
+<div class="con-sign-up">
+
+<h1 style="color: rgb(207, 12, 149);display: flex; justify-content: center; text-decoration: underline;">Sign Up</h1>
+<form action="" method="POST" class="sign-up-form" novalidate>
+    {% csrf_token %}
+    <ul>
+    {% for fm in form %}
+    <li>{{fm.label_tag}}  {{fm}}</li>  {{fm.errors|striptags}} 
+    {% endfor %}
+</ul>
+    <input  class="submit" style="font-weight: bolder; font-size: larger; border: 1px solid rgb(207, 12, 149);  text-shadow: 3px 3px 10px black;" type="submit" value="submit">
+</form>
+{% if messages %}
+{% for message in messages %}
+<small {% if message.tags %} class="{{message.tags}}" {% endif %}> {{message}} </small>
+{% endfor %}
+{% endif %}
+<p style="color: white;display: flex; justify-content: center;"> Already have an account ..<a class="login-link" href="{% url 'log_in' %}">Log in</a></p>
+</div>
+{% endblock content %}
+

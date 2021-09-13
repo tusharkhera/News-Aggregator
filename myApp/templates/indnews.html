@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cs/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cs/style.css' %}">
+    <title>Welcome {{name}}</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container-left">
+            <h1 class="logo">LOGO</h1>
+        </div>
+        <div class="container-mid">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'donate_us' %}">Support Us</a></li>
+            </ul>
+        </div>
+        <div class="container-right">
+            <ul>
+                <li><a href="{% url 'change_pass' %}">Change password</a></li>
+                <li><a href="{% url 'log_out' %}">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+    {% for message in messages %}
+    <small {% if message.tags %} class='{{message.tags}}'' {% endif %} style="color: rgb(207, 12, 149); ">{{message}}</small>
+    {% endfor %}
+    {% endif %}
+    
+    <div class="news">
+            
+        <div class="search-box">
+            <!-- <h1 style="color: rgb(207, 12, 149); font-size: 200px; font-style: italic;">LOGO</h1> -->
+            <h1 style="color: rgb(207, 12, 149); margin: auto; text-decoration: underline; margin-top: 1rem; ">Google News</h1>
+            <form class="search" method="GET" action="{% url 'search' %}">
+                {% csrf_token %}
+            <input type="search" name="search" id="search" placeholder="Type anything to search">
+            <button type="submit" style="background-color: transparent; margin-top: 2rem; border: 2px solid rgb(207, 12, 149); color: rgb(207, 12, 149);">Search</button>
+        </form>
+    </div>
+        <div class="headlines">
+            <a href="{% url 'pro_page' %}">Latest</a>
+            <a href="{% url 'ind_news' %}" style="color: rgb(207, 12, 149);">India</a>
+            <a href="{% url 'wrd_news' %}">World</a>
+            <a href="{% url 'pro_page' %}">Business</a>
+            <a href="{% url 'pro_page' %}">Technology</a>
+            <a href="{% url 'pro_page' %}">Entertainment</a>
+            <a href="{% url 'pro_page' %}">Sports</a>
+            <a href="{% url 'pro_page' %}">Science</a>
+            <a href="{% url 'pro_page' %}">Health</a>
+        </div>
+
+        
+        <div class="news-con">
+            {% for ind_news in ind_news %}
+            <div class="gnews">
+                <h3 style="color: white;">{{ind_news.0}}</h3>
+                <img src="{{ind_news.1}}" alt="" style="height: 300px; width: 300px; margin: auto;">
+                <button type="submit" style="background-color: transparent; margin-top: 2rem; border: 2px solid rgb(207, 12, 149);"><a href="{{ind_news.2}}" style="color: rgb(207, 12, 149);">View Full coverage</a></button>
+            </div>
+            {% endfor %}
+        </div>
+
+    <script src="{% static ' js/popper.js' %}"></script>
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

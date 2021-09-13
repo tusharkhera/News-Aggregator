@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cs/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cs/style.css' %}">
+    <title>Welcome {{name}}</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container-left">
+            <h1 class="logo">LOGO</h1>
+        </div>
+        <div class="container-mid">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'donate_us' %}">Support Us</a></li>
+            </ul>
+        </div>
+        <div class="container-right">
+            <ul>
+                <li><a href="{% url 'change_pass' %}">Change password</a></li>
+                <li><a href="{% url 'log_out' %}">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="container-donate-us">
+
+<h1 style="color: rgb(207, 12, 149);display: flex; justify-content: center; text-decoration: underline;">Donate Us</h1>
+<form action="" method="POST" class="donation-form" novalidate>
+    {% csrf_token %}
+    <ul>
+    {% for fm in form %}
+    <li>{{fm.label_tag}}  {{fm}}</li>  {{fm.errors|striptags}} 
+    {% endfor %}
+</ul>
+    <input  class="submit" style="font-weight: bolder; font-size: larger; border: 1px solid rgb(207, 12, 149);  text-shadow: 3px 3px 10px black;" type="submit" value="submit">
+</form>
+{% if messages %}
+{% for message in messages %}
+<small {% if message.tags %} class="{{message.tags}}" {% endif %}> {{message}} </small>
+{% endfor %}
+{% endif %}
+</div>
+
+<script src="{% static ' js/popper.js' %}"></script>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

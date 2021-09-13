@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'cs/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'cs/style.css' %}">
+    <title>{% block title %} {% endblock title %}</title>
+    <!-- <style>
+        
+    </style>
+     -->
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container-left">
+            <h1 class="logo">LOGO</h1>
+        </div>
+        <div class="container-mid" >
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% comment %} <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'donate_us' %}">Support Us</a></li> {% endcomment %}
+            </ul>
+        </div>
+        <div class="container-right">
+            <ul>
+                <li><a href="{% url 'sign_up' %}">Sign up</a></li>
+                <li><a href="{% url 'log_in' %}">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %} | {% endblock content %}
+
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
